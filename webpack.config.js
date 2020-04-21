@@ -1,3 +1,10 @@
+const { join } = require("path");
+
 module.exports = {
-  entry: "./index.js",
+  mode: "development",
+  entry: join(__dirname, "index.js"),
+  output: {
+    path: join(__dirname, "build"),
+    filename: "app.bundle.js",
+  },
 };
