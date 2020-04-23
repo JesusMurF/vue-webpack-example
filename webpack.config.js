@@ -7,4 +7,10 @@ module.exports = {
     path: join(__dirname, "build"),
     filename: "app.bundle.js",
   },
+  devServer: {
+    port: 1000,
+    hot: true,
+    open: "Google Chrome",
+    historyApiFallback: true,
+  },
 };
