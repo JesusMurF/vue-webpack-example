@@ -13,7 +13,7 @@ module.exports = {
   devServer: {
     port: 8080,
     hot: true,
-    open: "Google Chrome",
+    open: "chrome",
     historyApiFallback: true,
   },
   module: {
