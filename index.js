@@ -1,6 +1,6 @@
 import Vue from "vue";
-import Main from "./components/Main.vue";
-import { makeServer } from "./server";
+import Main from "./src/components/Main.vue";
+import { makeServer } from "./src/server";
 
 if (process.env.NODE_ENV === "development") {
   makeServer();
