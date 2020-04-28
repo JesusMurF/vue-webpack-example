@@ -14,7 +14,7 @@
     </ul>
     <p v-else>Loading...</p>
     <form method="post" @submit.prevent @submit="checkForm">
-      <input type="text" id="name" name="name" v-model="name" />
+      <input type="text" id="name" autocomplete="off"  name="name" v-model="name" />
       <input type="submit" />
     </form>
   </div>
