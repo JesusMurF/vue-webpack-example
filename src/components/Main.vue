@@ -1,22 +1,31 @@
 <template>
   <div>
-    <h1>Hello from Vue and Webpack</h1>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia fugiat
-      suscipit illum dolor quasi similique totam quibusdam est, magni quae iure
-      debitis amet, nisi accusamus molestias repudiandae ipsum asperiores eum!
-    </p>
     <h2>Usuarios</h2>
-    <ul v-if="!isLoading">
-      <li v-for="user in users" v-bind:key="user.id">
+    <ul v-if="!isLoadingUsers">
+      <li v-for="user in users" v-bind:key="user.id" @click="getUser(user.id)">
         {{ user.name }}
       </li>
     </ul>
     <p v-else>Loading...</p>
     <form method="post" @submit.prevent @submit="checkForm">
-      <input type="text" id="name" autocomplete="off"  name="name" v-model="name" />
+      <input
+        type="text"
+        id="name"
+        autocomplete="off"
+        name="name"
+        v-model="name"
+      />
       <input type="submit" />
     </form>
+    <div v-if="showDetail">{{ user.id }} - {{ user.name }}</div>
+
+    <h2>Trabajo</h2>
+    <ul v-if="!isLoadingJobs">
+      <li v-for="job in jobs" v-bind:key="job.id">
+        {{ job.title }}
+      </li>
+    </ul>
+    <p v-else>Loading...</p>
   </div>
 </template>
 
@@ -27,18 +36,31 @@ export default {
     return {
       name: "",
       users: [],
-      isLoading: true,
+      user: {},
+      jobs: [],
+      isLoadingUsers: true,
+      isLoadingJobs: true,
+      showDetail: false,
     };
   },
   created() {
     this.getUsers();
+    this.getJobs();
   },
   methods: {
+    getUser(id) {
+      this.showDetail = true;
+      fetch(`/api/users/${id}`)
+        .then((response) => response.json())
+        .then((user) => {
+          this.user = user;
+        });
+    },
     getUsers() {
       fetch("/api/users")
         .then((response) => response.json())
         .then((json) => {
-          this.isLoading = false;
+          this.isLoadingUsers = false;
           this.users = json.users;
         });
     },
@@ -47,10 +69,18 @@ export default {
         method: "POST",
         body: { name: this.name },
       }).then(() => {
-        this.isLoading = true;
+        this.isLoadingUsers = true;
         this.getUsers();
       });
       this.name = "";
+    },
+    getJobs() {
+      fetch("/api/jobs")
+        .then((response) => response.json())
+        .then((json) => {
+          this.isLoadingJobs = false;
+          this.jobs = json.jobs;
+        });
     },
   },
 };
@@ -72,5 +102,8 @@ h1 {
 }
 p {
   font-weight: normal;
+}
+li {
+  cursor: pointer;
 }
 </style>
