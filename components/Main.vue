@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello from Vue and Webpack</h1>
+    <h1>Vue y Webpack personalizado</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia fugiat
       suscipit illum dolor quasi similique totam quibusdam est, magni quae iure
@@ -17,14 +17,14 @@ export default {
 
 <style>
 @font-face {
-  font-family: "Anonymous Pro";
+  font-family: "Poppins";
   src: url("../fonts/Poppins-regular.ttf");
 }
 
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Anonymous Pro", monospace;
+  font-family: "Poppins", monospace;
 }
 h1 {
   color: slateblue;
